@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: consoleapp-job
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      containers:
+      - name: consoleapp-job-container
+        image: padmasekhar/consoleapp:latest
+        imagePullPolicy: Always
+        command: [ "dotnet", "DockerConsoleTest.dll" ]
+      restartPolicy: Never

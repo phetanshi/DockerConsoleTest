@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consoleapp-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consoleapp
+  template:
+    metadata:
+      labels:
+        app: consoleapp
+    spec:
+      containers:
+      - name: consoleapp-container
+        image: padmasekhar/consoleapp:latest
+        imagePullPolicy: Always
+        command: [ "dotnet", "DockerConsoleTest.dll" ]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - name: web
+            containerPort: 80
+            protocol: TCP
